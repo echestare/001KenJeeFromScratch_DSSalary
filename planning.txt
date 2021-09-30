@@ -1,0 +1,66 @@
+Data Science Project
+
+1 - Project Planning
+2 - Data Collection
+3 - Data Cleaning
+4 - EDA
+5 - Model Building
+6 - Production
+
+
+1- PROJECT PLANING:
+
+Primero buscar sobre ¿qué hacer un proyecto? ¿qué realmente me interesa?
+Puedo buscar en Kaggle, por ejemplo (muy recomendable).
+
+En este caso vamos a recolectar NUESTRO PROPIO DATA.
+
+Project Ideas:
+¿Qué me interesa?
+Al del video:
+-Sports
+	-Tenis
+	-Soccer
+-Data Sciente		---------> Salary -----> Job title, company, geography
+	-Career stuff
+	-Resumes
+	-Types of positions
+-Pandemic	Try yo understand that better.
+
+¿A mí?
+-Investigación
+-Abejas
+-sociología.
+-bitcoins????
+-Comercio del Arte????
+-Alimentos???
+-Biotecnologías <3 <3
+-
+-
+
+
+
+
+
+
+Description of Ken repo: 
+Repo for the dara science salary prediction of the Data Science Project From Scratch vide on my youtube.
+Ken Repo: https://github.com/PlayingNumbers/ds_salary_proj.git
+
+
+Busqué en google un scraping de Glassdoorl.com y el primer resultado fue esta bellesa:
+Repo de Ömar Sakarya: https://github.com/arapfaik/scraping-glassdoor-selenium.git
+Tutorial de Glassdoor Scraping: https://towardsdatascience.com/selenium-tutorial-scraping-glassdoor-com-in-10-minutes-3d0915c6d905
+
+NOTA: Selenium abre el browser y va copiando como si fuera un humano.
+
+
+import glassdoor_scraper as gs
+import pandas as pd
+
+path= "D:/ECHE/0-Datos/Projects Practicing/001 KenJeeFromScratch_DSSalary/chromedriver"
+
+df = gs.get_jobs('data scientist',15,False,path,30)
+
+
+https://www.glasdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword="+keyword"&sc.keyword"+keyword+"&sc.keyword=data+Scientist&locT=&locId=&jobType="
