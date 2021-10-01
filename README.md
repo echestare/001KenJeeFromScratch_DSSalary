@@ -1,5 +1,6 @@
 # 001KenJeeFromScratch_DSSalary
 # Don't look at me. Just copying exactly what Ken is doing. Let me practice in peace!! baka!
+I swore I gonna give a better look to this readme.
 
 Data Science Salary Estimator: Project Overview
 
