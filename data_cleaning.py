@@ -6,8 +6,24 @@ Created on Fri Oct  1 14:21:59 2021
 """
 import pandas as pd
 
-df = pd.read_csv("glassdoor_jobs.csv")
+df = pd.read_csv("data_scraped.csv")
 
+
+
+############################## some details ##############################
+#Cheking columns names:
+#df.columns
+#droping duplicates rows
+df=df.drop_duplicates()
+#deleting the undesirable column 1:
+df = df.drop(['Unnamed: 0'], axis =1)
+#deleting row without salary: our entirely analysis depends on salary info.
+df = df[df['Salary Estimate'] != '-1']
+#Reseting index
+df=df.reset_index(drop=True)
+#df.isnull().sum() #This line count how many nan data are in each column of the df
+#filling nan data with '-1'
+df = df.fillna('-1')
 
 ##############################SALARY PARSING##############################
 
@@ -55,7 +71,7 @@ df['company_txt']= df.apply(lambda x: x['Company Name'] if x['Rating']<0 else x[
 ##############################state field##############################
 #Here can be seeing that States are after the comma.
     #The next line split the cell and take what is after the comma. Simple.
-df['job_state'] = df['Location'].apply(lambda x: x.split(',')[1])
+df['job_state'] = df['Location'].apply(lambda x: x.split(',')[1] if ',' in x else x)
     #If we want to see how many are in each state (it prints the result in the console):
 #df.job_state.value_counts()
 
@@ -81,6 +97,7 @@ df['age'] = df.Founded.apply(lambda x: x if x<1 else 2021-x)
     #So he determined (beginning with this example investigation) 5 keywords from the source: python, r studio, sparks, aws and excel.
     
     #Could this source be enough for me now (2021)?: https://searchbusinessanalytics.techtarget.com/feature/15-data-science-tools-to-consider-using 
+                                                    #https://www.jigsawacademy.com/top-analytics-tools-every-data-scientist-must-learn/
     
     #Well, we count how many jobs_descriptions mention each keyword:
 #python 
@@ -101,22 +118,101 @@ df.aws_yn.value_counts()
 #excel
 df['excel_yn']  = df['Job Description'].apply(lambda x: 1 if 'excel' in x.lower() else 0)
 df.excel_yn.value_counts()
+#sql
+df['sql_yn']  = df['Job Description'].apply(lambda x: 1 if 'sql' in x.lower() else 0)
+df.sql_yn.value_counts()
+#sas 
+df['sas_yn']  = df['Job Description'].apply(lambda x: 1 if (' sas ' in x.lower() or ' sas,' in x.lower() or ' sas.' in x.lower())  else 0)
+df.sas_yn.value_counts()
+#d3js
+df['d3js_yn']  = df['Job Description'].apply(lambda x: 1 if 'd3' in x.lower() else 0)
+df.d3js_yn.value_counts()
+#julia
+df['julia_yn']  = df['Job Description'].apply(lambda x: 1 if 'julia' in x.lower() else 0)
+df.julia_yn.value_counts()
+#jupyter
+df['jupyter_yn']  = df['Job Description'].apply(lambda x: 1 if 'jupyter' in x.lower() else 0)
+df.jupyter_yn.value_counts()
+#keras
+df['keras_yn']  = df['Job Description'].apply(lambda x: 1 if 'keras' in x.lower() else 0)
+df.keras_yn.value_counts()
+#matlab
+df['matlab_yn']  = df['Job Description'].apply(lambda x: 1 if 'matlab' in x.lower() else 0)
+df.matlab_yn.value_counts()
+#matplotlib
+df['matplotlib_yn']  = df['Job Description'].apply(lambda x: 1 if 'matplotlib' in x.lower() else 0)
+df.matplotlib_yn.value_counts()
+#pytorch
+df['pytorch_yn']  = df['Job Description'].apply(lambda x: 1 if 'pytorch' in x.lower() else 0)
+df.pytorch_yn.value_counts()
+#scikit-learn
+df['scikit_yn']  = df['Job Description'].apply(lambda x: 1 if 'scikit' in x.lower() else 0)
+df.scikit_yn.value_counts()
+#tensor
+df['tensor_yn']  = df['Job Description'].apply(lambda x: 1 if 'tensor' in x.lower() else 0)
+df.tensor_yn.value_counts()
+#weka
+df['weka_yn']  = df['Job Description'].apply(lambda x: 1 if 'weka' in x.lower() else 0)
+df.weka_yn.value_counts()
+#selenium
+df['selenium_yn']  = df['Job Description'].apply(lambda x: 1 if 'selenium' in x.lower() else 0)
+df.selenium_yn.value_counts()
+#hadoop
+df['hadoop_yn']  = df['Job Description'].apply(lambda x: 1 if 'hadoop' in x.lower() else 0)
+df.hadoop_yn.value_counts()
+#tableau
+df['tableau_yn']  = df['Job Description'].apply(lambda x: 1 if 'tableau' in x.lower() else 0)
+df.tableau_yn.value_counts()
+#power bi
+df['bi_yn']  = df['Job Description'].apply(lambda x: 1 if ('power bi' in x.lower() or 'powerbi' in x.lower()) else 0)
+df.bi_yn.value_counts()
+#bigml
+df['bigml_yn']  = df['Job Description'].apply(lambda x: 1 if 'bigml' in x.lower() else 0)
+df.bigml_yn.value_counts()
+#rapidminer
+df['rapidminer_yn']  = df['Job Description'].apply(lambda x: 1 if 'rapidminer' in x.lower() else 0)
+df.rapidminer_yn.value_counts()
+#apache flink
+df['flink_yn']  = df['Job Description'].apply(lambda x: 1 if 'flink' in x.lower() else 0)
+df.flink_yn.value_counts()
+#datarobot
+df['datarobot_yn']  = df['Job Description'].apply(lambda x: 1 if 'datarobot' in x.lower() else 0)
+df.datarobot_yn.value_counts()
+#sap hana
+df['hana_yn']  = df['Job Description'].apply(lambda x: 1 if 'hana' in x.lower() else 0)
+df.hana_yn.value_counts()
+#mongo db
+df['mongo_yn']  = df['Job Description'].apply(lambda x: 1 if 'mongo' in x.lower() else 0)
+df.mongo_yn.value_counts()
+#trifacta
+df['trifacta_yn']  = df['Job Description'].apply(lambda x: 1 if 'trifacta' in x.lower() else 0)
+df.trifacta_yn.value_counts()
+#minitab
+df['minitab_yn']  = df['Job Description'].apply(lambda x: 1 if 'minitab' in x.lower() else 0)
+df.minitab_yn.value_counts()
+#kafka
+df['kafka_yn']  = df['Job Description'].apply(lambda x: 1 if 'kafka' in x.lower() else 0)
+df.kafka_yn.value_counts()
+#microstrategy
+df['microstrategy_yn']  = df['Job Description'].apply(lambda x: 1 if 'microstrategy' in x.lower() else 0)
+df.microstrategy_yn.value_counts()
+#google analytics
+df['google_an_yn']  = df['Job Description'].apply(lambda x: 1 if 'google analytics' in x.lower() else 0)
+df.google_an_yn.value_counts()
+#Statistical Package for the Social Sciences
+df['spss_yn']  = df['Job Description'].apply(lambda x: 1 if 'spss' in x.lower() else 0)
+df.spss_yn.value_counts()
 
 
 
 
-
-############################## last details ##############################
-#Cheking columns names:
-#df.columns
-#new dataframe withouut the undesirable column 1:
-df_out = df.drop(['Unnamed: 0'], axis =1)
 
 
 
 
 ############################## exporting the cleaned database ##############################
-df_out.to_csv('salary_data_cleaned.csv',index=False)
+df_out=df
+df_out.to_csv('data_cleaned.csv',index=False)
 
 #Checking if the database was exported correctly:
 #pd.read_csv('salary_data_cleaned.csv')
